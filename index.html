@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,16 +8,22 @@
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://use.typekit.net/eqv1shm.css">
 </head>
+
 <body>
   <header class="site-header">
-    <div class="brand" >Fakekammer</div>
+    <div class="brand">Fakekammer</div>
     <div class="subtitle">a generated wunderkammer of doubtful objects</div>
     <section class="intro" id="introPanel">
-    Fakekammer는 한 수집가가 모은 ‘가짜들’로 이루어진 아카이브이자, 여전히 가짜로 남아 있는 것들과 진짜가 되어버린 가짜들을 통해 진위의 경계를 탐구하는 전시이다. 이 프로젝트는 중세의 ‘경이의 방(Wunderkammer)’을 모티프로 삼는다. 과거의 수집가들이 기이하고 희귀한 물건들을 한 방 안에 모아 자신만의 세계를 축소해 두었다면, Fakekammer는 ‘가짜’라는 공통된 키워드로 모인 기묘한 소우주를 구성한다. 진짜처럼 보이도록 정교하게 제작된 위조품, 장난, 허구적 아카이브들을 통해, 사실과 허구의 경계가 어떻게 흔들리고 이동하는지를 시각적으로 드러낸다. 관람객은 이 방을 거닐며, 누군가가 믿고 싶어서 만들어낸 것들이 지닌 매력과 집요함을 마주하게 된다. 그리고 마침내 진짜로 굳어지는 가짜와 여전히 가짜로 남는 가짜 사이를 오가며, 무엇이 진짜인가가 아니라 무엇을 어떻게 믿어 왔는가라는 질문을 경험하게 된다.
+      Fakekammer는 한 수집가가 모은 ‘가짜들’로 이루어진 아카이브이자, 여전히 가짜로 남아 있는 것들과 진짜가 되어버린 가짜들을 통해 진위의 경계를 탐구하는 전시이다. 이 프로젝트는 중세의 ‘경이의
+      방(Wunderkammer)’을 모티프로 삼는다. 과거의 수집가들이 기이하고 희귀한 물건들을 한 방 안에 모아 자신만의 세계를 축소해 두었다면, Fakekammer는 ‘가짜’라는 공통된 키워드로 모인
+      기묘한 소우주를 구성한다. 진짜처럼 보이도록 정교하게 제작된 위조품, 장난, 허구적 아카이브들을 통해, 사실과 허구의 경계가 어떻게 흔들리고 이동하는지를 시각적으로 드러낸다. 관람객은 이 방을 거닐며,
+      누군가가 믿고 싶어서 만들어낸 것들이 지닌 매력과 집요함을 마주하게 된다. 그리고 마침내 진짜로 굳어지는 가짜와 여전히 가짜로 남는 가짜 사이를 오가며, 무엇이 진짜인가가 아니라 무엇을 어떻게 믿어
+      왔는가라는 질문을 경험하게 된다.
     </section>
   </header>
 
   <nav class="tools" aria-label="archive controls">
+    <button id="centerBtn" class="icon-btn" type="button" aria-label="back to center">reset view</button>
     <button id="saveBtn" type="button">save image</button>
     <button id="clearBtn" type="button">clear</button>
   </nav>
@@ -37,11 +44,16 @@
       <h1 id="panelTitle"></h1>
 
       <dl class="meta">
-        <dt>ID</dt><dd id="panelId"></dd>
-        <dt>Year</dt><dd id="panelYear"></dd>
-        <dt>Reality mode</dt><dd id="panelMode"></dd>
-        <dt>Status</dt><dd id="panelStatus"></dd>
-        <dt>Value type</dt><dd id="panelValue"></dd>
+        <dt>ID</dt>
+        <dd id="panelId"></dd>
+        <dt>Year</dt>
+        <dd id="panelYear"></dd>
+        <dt>Reality mode</dt>
+        <dd id="panelMode"></dd>
+        <dt>Status</dt>
+        <dd id="panelStatus"></dd>
+        <dt>Value type</dt>
+        <dd id="panelValue"></dd>
       </dl>
 
       <div id="panelDesc" class="description"></div>
@@ -164,8 +176,8 @@
         presentStatus: "cultual_icon",
         valueType: "historical_value",
         link: "https://en.wikipedia.org/wiki/Ossian"
-        },
-        {
+      },
+      {
         id: 12,
         assetBase: "asset/fake_12",
         title: "드보르 크랄로베와 젤레나 호라의 원고 Manuscripts of Dvůr Králové and Zelená Hora",
@@ -175,8 +187,8 @@
         presentStatus: "discarded_fake",
         valueType: "educational_value",
         link: "https://en.wikipedia.org/wiki/Manuscripts_of_Dv%C5%AFr_Kr%C3%A1lov%C3%A9_and_Zelen%C3%A1_Hora"
-        },
-        {
+      },
+      {
         id: 13,
         assetBase: "asset/fake_13",
         title: "베스티아리움 스코티쿰 Vestiarium Scoticum",
@@ -186,8 +198,8 @@
         presentStatus: "theoretical_model",
         valueType: "aesthetic_value",
         link: "https://en.wikipedia.org/wiki/Vestiarium_Scoticum"
-        },
-        {
+      },
+      {
         id: 14,
         assetBase: "asset/fake_14",
         title: "왈람 올룸 Walam Olum",
@@ -197,8 +209,8 @@
         presentStatus: "cautionary_case",
         valueType: "historical_value",
         link: "https://en.wikipedia.org/wiki/Walam_Olum"
-        },
-        {
+      },
+      {
         id: 15,
         assetBase: "asset/fake_15",
         title: "세 명의 사기꾼에 관한 논문 Treatise of the Three Impostors",
@@ -208,8 +220,8 @@
         presentStatus: "cautionary_case",
         valueType: "historical_value",
         link: "https://en.wikipedia.org/wiki/Treatise_of_the_Three_Impostors"
-        },
-        {
+      },
+      {
         id: 16,
         assetBase: "asset/fake_16",
         title: "시온 의정서 The Protocols of the Elders of Zion",
@@ -219,8 +231,8 @@
         presentStatus: "cautionary_case",
         valueType: "historical_value",
         link: "https://en.wikipedia.org/wiki/The_Protocols_of_the_Elders_of_Zion"
-        },
-        {
+      },
+      {
         id: 17,
         assetBase: "asset/fake_17",
         title: "콘스탄티누스의 기증서 Donation of Constantine",
@@ -230,8 +242,8 @@
         presentStatus: "cultual_icon",
         valueType: "historical_value",
         link: "https://en.wikipedia.org/wiki/Donation_of_Constantine"
-        },
-        {
+      },
+      {
         id: 18,
         assetBase: "asset/fake_18",
         title: "예수의 아내의 복음서 Gospel of Jesus' Wife",
@@ -241,8 +253,8 @@
         presentStatus: "cautionary_case",
         valueType: "historical_value",
         link: "https://en.wikipedia.org/wiki/Gospel_of_Jesus%27_Wife#Links_to_conspiracy_theories"
-        },
-        {
+      },
+      {
         id: 19,
         assetBase: "asset/fake_19",
         title: "히틀러 일기 Hitler Diaries",
@@ -252,8 +264,8 @@
         presentStatus: "cautionary_case",
         valueType: "educational_value",
         link: "https://en.wikipedia.org/wiki/Hitler_Diaries"
-        },
-        {
+      },
+      {
         id: 20,
         assetBase: "asset/fake_20",
         title: "애틀랜타의 밤 Atlanta Nights",
@@ -263,8 +275,8 @@
         presentStatus: "theoretical_model",
         valueType: "conceptual_value",
         link: "https://en.wikipedia.org/wiki/Atlanta_Nights"
-        },
-        {
+      },
+      {
         id: 21,
         assetBase: "asset/fake_21",
         title: "낯선 이가 벌거벗은 채 나타났다 Naked Came the Stranger",
@@ -944,20 +956,37 @@
         valueType: "aesthetic_value"
       },
 
-      
+
     ];
-    
+
     let remainingItems = [...ARCHIVE];
     const stage = document.getElementById("stage");
     const hint = document.getElementById("hint");
     const panel = document.getElementById("panel");
     const closeBtn = document.getElementById("closeBtn");
+    const STAGE_WIDTH = 10000;
+    const STAGE_HEIGHT = 7000;
+
+    const initialViewport = {
+      x: Math.round((window.innerWidth - STAGE_WIDTH) / 2),
+      y: Math.round((window.innerHeight - STAGE_HEIGHT) / 2)
+    };
 
     let zCounter = 20;
     const viewport = {
-      x: Math.round((window.innerWidth - 5200) / 2),
-      y: Math.round((window.innerHeight - 3600) / 2)
+        x: initialViewport.x,
+        y: initialViewport.y
     };
+
+    document.getElementById("centerBtn").addEventListener("click", e => {
+      e.stopPropagation();
+
+      viewport.x = initialViewport.x;
+      viewport.y = initialViewport.y;
+
+      applyViewport();
+      closePanel();
+    });
 
     function applyViewport() {
       stage.style.transform = `translate(${viewport.x}px, ${viewport.y}px)`;
@@ -970,9 +999,22 @@
       };
     }
 
+    function clampViewport() {
+      const minX = window.innerWidth - STAGE_WIDTH;
+      const maxX = 0;
+
+      const minY = window.innerHeight - STAGE_HEIGHT;
+      const maxY = 0;
+
+      viewport.x = Math.min(maxX, Math.max(minX, viewport.x));
+      viewport.y = Math.min(maxY, Math.max(minY, viewport.y));
+    }
+
     function panBy(dx, dy) {
       viewport.x -= dx;
       viewport.y -= dy;
+
+      clampViewport();
       applyViewport();
       closePanel();
     }
@@ -1117,7 +1159,7 @@
       el.addEventListener("pointerup", e => {
         try {
           el.releasePointerCapture(e.pointerId);
-        } catch (err) {}
+        } catch (err) { }
 
         startX = undefined;
         startY = undefined;
@@ -1220,7 +1262,7 @@
       canvas.width = Math.round(window.innerWidth * exportScale);
       canvas.height = Math.round(window.innerHeight * exportScale);
 
-     const ctx = canvas.getContext("2d");
+      const ctx = canvas.getContext("2d");
 
       ctx.scale(exportScale, exportScale);
 
@@ -1332,7 +1374,8 @@
     stage.addEventListener("click", () => {
       console.log("stage click");
     });
-    
+
   </script>
 </body>
+
 </html>

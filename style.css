@@ -1,3 +1,27 @@
+@font-face {
+  font-family: "ABCsynt";
+  src: url("font/ABCSyntVariableVF-Trial.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "ABCpublisher";
+  src: url("font/ABCPublisherRoundedSlabPlusVariable-Trial.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap
+}
+
+@font-face {
+  font-family: "ABCpublisherCond";
+  src: url("font/ABCPublisherRoundedSlabCondensedVariable-Trial.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap
+}
+
 :root {
       --bg: #ffffff;
       --ink: #000000;
@@ -22,7 +46,7 @@
         radial-gradient(circle at 15% 10%, rgba(255,255,255,.98), transparent 28%),
         linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
       color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", monospace;
       cursor: crosshair;
       user-select: none;
       overscroll-behavior: none;
@@ -35,7 +59,7 @@
     .site-header {
       position: fixed;
       width: fit-content;
-      top: 22px;
+      top: 16px;
       left: 28px;
       z-index: 1000;
       mix-blend-mode: normal;
@@ -47,27 +71,29 @@
       background: transparent;
       padding: 0;
       border-radius: 0;
+      margin-bottom: -6px;
 
-      font-family: "eco", sans-serif;
+      font-family: "ABCsynt", serif;
       font-weight: 400;
       font-style: normal;
       font-size: 60px;
       letter-spacing: .02em;
-      font-weight: 500;
-      color: var(--ink);
+      color: #ff00ff;
 
       cursor: help;
       transition: opacity .2s ease;
     }
 
     .brand:hover {
-      opacity: .55;
+      opacity: 1;
     }
 
     .subtitle {
-      margin-top: 5px;
-      font-size: 11px;
-      color: #000000;
+      margin-top: 0px;
+      font-family: "ABCpublisherCond", monospace;
+      font-weight: 500;
+      font-size: 16px;
+      color: #ff00ff;
       letter-spacing: .08em;
       text-transform: uppercase;
     }
@@ -90,6 +116,17 @@
 
     .stage {
       pointer-events: auto;
+      width: 10000px;
+      height: 7000px;
+      transition: background-color .35s ease;
+    }
+
+    body:has(.site-header:hover) .stage {
+      background-color: #ff00ff;
+    }
+
+    body:has(.artifact:hover) .stage {
+      background-color: #ff00ff;
     }
 
     button {
@@ -99,13 +136,15 @@
       color:#fff;
       border-radius: 999px;
       padding: 8px 12px;
+      font-family: "ABCpublisher", monospace;
+      font-weight: 500;
       font-size: 12px;
       letter-spacing: -.01em;
       cursor: pointer;
     }
 
     button:hover {
-      background: #000000;
+      background: #ff00ff;
     }
 
     .intro {
@@ -145,8 +184,6 @@
       position: fixed;
       left: 0;
       top: 0;
-      width: 5200px;
-      height: 3600px;
       min-width: 100vw;
       min-height: 100vh;
       overflow: visible;
@@ -156,18 +193,6 @@
       background-image:
       radial-gradient(circle, rgba(0,0,0,.3) 1px, transparent 0.8px);
       background-size: 36px 36px;
-    }
-
-    .stage::before {
-      content: "";
-      position: absolute;
-      left: 28px;
-      top: 82px;
-      width: calc(100vw - 56px);
-      height: calc(100vh - 116px);
-      border: 1px solid rgba(0,0,0,.045);
-      pointer-events: none;
-      z-index: 0;
     }
 
     .hint {
@@ -227,7 +252,7 @@
       height: auto;
       display: block;
       background: #ffffff;
-      box-shadow: 0 10px 24px rgba(0,0,0,.10);
+      box-shadow: 0 0 16px rgba(255,0,255,.5);
       filter: saturate(.82) contrast(1.02);
       transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
       -webkit-user-drag: none;
@@ -235,7 +260,7 @@
 
     .artifact:hover img {
       transform: scale(1.04);
-      box-shadow: 0 18px 44px rgba(0,0,0,.18);
+      box-shadow: 0 0 16px rgba(255,0,255,.5);
       filter: saturate(.92) contrast(1.05);
     }
 
