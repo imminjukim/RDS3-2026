@@ -89,25 +89,40 @@
       padding: 0;
       border-radius: 0;
       margin-bottom: -6px;
+      z-index: 1;
 
-      font-family: "BC Blot", sans-serif;
+      font-family: "acid-green", sans-serif;
       font-weight: 400;
       font-style: normal;
-      font-size: 60px;
+      font-size: 80px;
       letter-spacing: .02em;
       color: #ff00ff;
       
-      text-shadow: 
-        3px 3px 6px #c6a3bf,
-        -3px -3px 6px #ffffff;
+      /* 젤리 질감 */
+      -webkit-text-stroke: 0.6px rgba(255,255,255,.22);
+
+      text-shadow:
+         0 -1px 0 rgba(255,255,255,.45),
+         0 1px 0 rgba(255,150,255,.75),
+         0 2px 0 rgba(200,0,200,.85),
+         0 3px 0 rgba(120,0,120,.35);
+
+      filter:
+        saturate(1.12)
+        contrast(1.04);
+
+      transition:
+        transform .18s ease,
+        text-shadow .18s ease,
+        filter .18s ease,
+        opacity .2s ease;
 
       cursor: help;
-      transition: opacity .2s ease;
       
     }
 
     .brand:hover {
-      opacity: 1;
+      opacity: 0;
     }
 
     .subtitle {
@@ -151,6 +166,10 @@
       background-color: #ff00ff;
     }
 
+    body:has(.artifact:hover) .brand {
+      opacity: 0;
+    }
+
     button {
       background: rgba(0,0,0,1);
       color: #fff;
@@ -180,9 +199,9 @@
       border-color: rgba(255,0,255,.8);
 
       box-shadow:
-        0 0 10px rgba(255,0,255,.75),
-        0 0 24px rgba(255,0,255,.45),
-        0 0 60px rgba(255,0,255,.18);
+        0 0 5px rgba(255,0,255,.75),
+        0 0 12px rgba(255,0,255,.45),
+        0 0 40px rgba(255,0,255,.18);
 
       text-shadow:
         0 0 8px rgba(255,255,255,.35);
@@ -194,6 +213,7 @@
       position: absolute;
       top: 52px;
       left: 0;
+      z-index: 100;
 
       width: min(420px, calc(100vw - 56px));
 
@@ -225,6 +245,10 @@
       transform: translateY(0);
     }
 
+    site-header:hover .brand {
+      opacity: 0 !important;
+    }
+
     .stage {
       position: fixed;
       left: 0;
@@ -236,7 +260,7 @@
       will-change: transform;
 
       background-image:
-      radial-gradient(circle, rgba(0,0,0,.3) 1px, transparent 0.8px);
+      radial-gradient(circle, rgba(255, 255, 255, 1) 1px, transparent 0.8px);
       background-size: 36px 36px;
     }
 
