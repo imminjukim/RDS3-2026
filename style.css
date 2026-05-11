@@ -22,6 +22,14 @@
   font-display: swap
 }
 
+@font-face {
+  font-family: "ABCsolar";
+  src: url("font/ABCSolarDisplayVariable-Trial.woff") format("woff");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap
+}
+
 :root {
       --bg: #ffffff;
       --ink: #000000;
@@ -46,7 +54,7 @@
         radial-gradient(circle at 15% 10%, rgba(255,255,255,.98), transparent 28%),
         linear-gradient(180deg, #ffffff 0%, var(--bg) 100%);
       color: var(--ink);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", monospace;
+      font-family: "ABCsolar", "dongle", "Apple SD Gothic Neo", sans-serif;
       cursor: crosshair;
       user-select: none;
       overscroll-behavior: none;
@@ -56,10 +64,19 @@
       line-break: strict;
     }
 
+    .intro,
+    .panel,
+    .panel-text,
+    .meta,
+    .description,
+    button {
+      font-family: "ABCsolar", "Apple SD Gothic Neo", sans-serif;
+    }
+
     .site-header {
       position: fixed;
       width: fit-content;
-      top: 16px;
+      top: 12px;
       left: 28px;
       z-index: 1000;
       mix-blend-mode: normal;
@@ -73,15 +90,20 @@
       border-radius: 0;
       margin-bottom: -6px;
 
-      font-family: "ABCsynt", serif;
+      font-family: "BC Blot", sans-serif;
       font-weight: 400;
       font-style: normal;
       font-size: 60px;
       letter-spacing: .02em;
       color: #ff00ff;
+      
+      text-shadow: 
+        3px 3px 6px #c6a3bf,
+        -3px -3px 6px #ffffff;
 
       cursor: help;
       transition: opacity .2s ease;
+      
     }
 
     .brand:hover {
@@ -90,7 +112,7 @@
 
     .subtitle {
       margin-top: 0px;
-      font-family: "ABCpublisherCond", monospace;
+      font-family: "ABCsolar", monospace;
       font-weight: 500;
       font-size: 16px;
       color: #ff00ff;
@@ -130,21 +152,42 @@
     }
 
     button {
-      border: 1px solid var(--line);
-      background: rgba(0, 0, 0);
+      background: rgba(0,0,0,1);
+      color: #fff;
+      padding: 5px 20px;
+      border-radius: 22px;
       backdrop-filter: blur(12px);
-      color:#fff;
-      border-radius: 999px;
-      padding: 8px 12px;
-      font-family: "ABCpublisher", monospace;
-      font-weight: 500;
-      font-size: 12px;
-      letter-spacing: -.01em;
+      box-shadow:
+        0 0 18px rgba(255, 255, 255, 0),
+        0 0 40px rgba(255,255,255,.03);
+
+      font-family: "ABCsolar", monospace;
+      font-weight: 450;
+      font-size: 14px;
+
       cursor: pointer;
+      transition:
+        background .2s ease,
+        box-shadow .2s ease,
+        transform .2s ease;
     }
 
     button:hover {
       background: #ff00ff;
+
+      color: #000;
+
+      border-color: rgba(255,0,255,.8);
+
+      box-shadow:
+        0 0 10px rgba(255,0,255,.75),
+        0 0 24px rgba(255,0,255,.45),
+        0 0 60px rgba(255,0,255,.18);
+
+      text-shadow:
+        0 0 8px rgba(255,255,255,.35);
+
+      transform: translateY(-1px);
     }
 
     .intro {
@@ -154,6 +197,8 @@
 
       width: min(420px, calc(100vw - 56px));
 
+      font-family: "Apple SD Gothic Neo", sans-serif;
+      font-weight: 500;
       font-size: 13px;
       line-height: 1.7;
       color: #000000;
@@ -202,8 +247,11 @@
       transform: translate(-50%, -50%);
       text-align: center;
       z-index: 1;
-      color: rgba(0,0,0);
-      font-size: 12px;
+      color: rgba(0,0,0,1);
+
+      font-family: "ABCsolar";
+      font-weight: 500;
+      font-size: 16px;
       letter-spacing: .08em;
       text-transform: uppercase;
       pointer-events: none;
@@ -326,19 +374,24 @@
     }
 
     .panel-text {
+      font-family: "ABCsolar", sans-serif;
+      font-weight: 400;
       color: #fff;
       padding: 16px 18px 16px;
       overflow: hidden;
       background: transparent;
       display: block;
+      line-height: 1.6;
+      letter-spacing: 0.01rem;
     }
 
     .panel-text h1 {
+      font-family: "ABCsolar", sans-serif;
+      font-weight: 320;
       margin: 0 0 10px;
       font-size: clamp(16px, 2vw, 20px);
       line-height: 1.12;
-      font-weight: 560;
-      letter-spacing: -.045em;
+      letter-spacing:0;
     }
 
     .meta {
