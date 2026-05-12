@@ -116,7 +116,7 @@
       filter:
         saturate(1.12)
         contrast(1.04);
-
+      opacity: 0;
       transition:
         transform .18s ease,
         text-shadow .18s ease,
@@ -125,6 +125,11 @@
 
       cursor: help;
       
+    }
+
+    .wf-active .brand,
+    .wf-inactive .brand {
+      opacity: 1;
     }
 
     .brand:hover {
