@@ -171,10 +171,14 @@
 
     body:has(.site-header:hover) .stage {
       background-color: #ff00ff;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 0.8px);
     }
 
     body:has(.artifact:hover) .stage {
       background-color: #ff00ff;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,1) 1px, transparent 0.8px);
     }
 
     body:has(.artifact:hover) .brand {
@@ -271,7 +275,7 @@
       will-change: transform;
 
       background-image:
-      radial-gradient(circle, rgba(255, 255, 255, 1) 1px, transparent 0.8px);
+        radial-gradient(circle, rgba(0, 0, 0, 1) 1px, transparent 0.8px);
       background-size: 36px 36px;
     }
 
@@ -505,3 +509,351 @@
         width: min(320px, calc(100vw - 36px));
       }
     }
+
+.print-catalog {
+  display: none !important;
+}
+
+.flipbook {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+
+  background-color: #fff;
+
+  color: #000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+}
+
+.flipbook.open {
+  display: flex;
+}
+
+.flipbook-close {
+  position: fixed;
+  top: 22px;
+  right: 24px;
+  z-index: 5100;
+}
+
+.flipbook-download {
+  position: fixed;
+  top: 22px;
+  right: 110px;
+  z-index: 5100;
+}
+
+.book {
+  position: relative;
+  width: min(1040px, 76vw);
+  height: min(700px, 84vh);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spread.cover-mode::before,
+.spread.back-cover-mode::before {
+  display: none;
+}
+
+.spread {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fff;
+  box-shadow: 0 30px 80px rgba(0,0,0,.25);
+
+  position: relative;
+  perspective: 1800px;
+}
+
+.spread::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 42px;
+  transform: translateX(-50%);
+  z-index: 20;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      to right,
+      rgba(255,255,255,0.18) 0%,
+      rgba(0,0,0,0.08) 38%,
+      rgba(0,0,0,0.22) 50%,
+      rgba(0,0,0,0.08) 62%,
+      rgba(255,255,255,0.18) 100%
+    );
+}
+
+.book-page {
+  background: #fff;
+  padding: 36px;
+  overflow: hidden;
+  border: 0.5px solid rgba(0,0,0,.16);
+
+  display: grid;
+  grid-template-rows: 45% 1fr;
+  gap: 22px;
+
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.book-image-area {
+  margin: 0;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-image-area img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.book-text {
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-top: 1px solid #000;
+  padding-top: 18px;
+  padding-right: 8px;
+}
+
+.book-number {
+  font-family: "ABCsolar", sans-serif;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.book-text h2 {
+  font-family: "ABCsolar", "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(14px, 1.25vw, 19px);
+  font-weight: 500;
+  line-height: 1.22;
+  margin: 0 0 12px;
+}
+
+
+.book-text dl {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 4px 12px;
+  font-family: "ABCsolar", "Apple SD Gothic Neo", sans-serif;
+  font-size: 10px;
+  line-height: 1.3;
+  margin-bottom: 10px;
+  margin: 0 0 12px;
+  
+}
+
+.book-text dt {
+  font-weight: 600;
+}
+
+.book-text dd {
+  margin: 0;
+}
+
+.book-text p {
+  font-family: "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(9.5px, .75vw, 12px);
+  line-height: 1.45;
+  margin: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.book-cover {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.book-cover-content h1 {
+  font-family: "acid-green", "ABCsolar", sans-serif;
+  font-size: clamp(48px, 7vw, 84px);
+  font-weight: 400;
+  line-height: .9;
+  margin: 0 0 18px;
+}
+
+.book-cover-content p {
+  font-family: "ABCsolar", sans-serif;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.book-intro {
+  height: 100%;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.book-intro h2 {
+  font-family: "ABCsolar", "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(16px, 1.5vw, 21px);
+  font-weight: 500;
+  margin: 0 0 14px;
+  border-bottom: 1px solid #000;
+  padding-bottom: 10px;
+}
+
+.book-intro p {
+  font-family: "Apple SD Gothic Neo", sans-serif;
+  font-size: clamp(9px, .75vw, 11.5px);
+  line-height: 1.55;
+  margin: 0;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+
+.page-btn {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5100;
+
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  padding: 0;
+
+  font-size: 30px;
+  line-height: 1;
+}
+
+.page-btn.prev {
+  left: clamp(24px, 5vw, 96px);
+}
+
+.page-btn.next {
+  right: clamp(24px, 5vw, 96px);
+}
+
+.page-btn,
+.page-btn:active,
+.page-btn:focus {
+  transform: translateY(-50%) !important;
+  transition: background .15s ease, color .15s ease !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  outline: none !important;
+}
+
+.page-btn:hover {
+  transform: translateY(-50%) !important;
+  background: #ff00ff !important;
+  color: #000 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.blank-page {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.single-page {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+}
+
+.spread.cover-mode,
+.spread.back-cover-mode {
+  grid-template-columns: 1fr;
+  width: min(460px, 38vw);
+}
+
+.spread.spread-mode {
+  grid-template-columns: 1fr 1fr;
+  width: 100%;
+}
+
+.page-hidden {
+  display: none !important;
+}
+
+.cover-single {
+  width: 100%;
+  height: 100%;
+}
+
+.book-cover {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.book-cover-content h1 {
+  font-family: "acid-green", "ABCsolar", sans-serif;
+  font-size: clamp(52px, 6vw, 82px);
+  font-weight: 400;
+  line-height: .9;
+  margin: 0 0 18px;
+}
+
+.book-cover-content p {
+  font-family: "ABCsolar", sans-serif;
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.book {
+  perspective: 1800px;
+  position: relative;
+}
+
+.page-btn {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 5200;
+
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+
+  transition: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+.page-btn.prev {
+  left: -90px !important;
+}
+
+.page-btn.next {
+  right: -90px !important;
+}
+
+.page-btn:hover {
+  transform: translateY(-50%) !important;
+  background: #ff00ff !important;
+  color: #000 !important;
+}

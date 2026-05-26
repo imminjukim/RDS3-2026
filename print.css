@@ -1,0 +1,151 @@
+.print-catalog {
+  display: none !important;
+}
+
+@page {
+  size: A4 portrait;
+  margin: 18mm 16mm;
+}
+
+@media print {
+  html,
+  body {
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  body > *:not(.print-catalog) {
+    display: none !important;
+  }
+
+  .print-catalog {
+    display: block !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  .print-cover,
+  .print-intro-page,
+  .print-item {
+    width: 100%;
+    min-height: 261mm;
+    box-sizing: border-box;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .print-back-cover {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .print-cover {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+  }
+
+  .print-cover img {
+    width: 100%;
+    height: 261mm;
+    object-fit: cover;
+    display: block;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print-intro-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .print-intro {
+    font-family: "Apple SD Gothic Neo", sans-serif;
+    font-size: 12pt;
+    line-height: 1.8;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+
+  .print-item {
+    display: grid;
+    grid-template-rows: 45% 1fr;
+    gap: 8mm;
+    background: #fff;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  .print-image-area {
+    margin: 0;
+    min-height: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .print-image-area img {
+    max-width: 100%;
+    max-height: 118mm;
+    object-fit: contain;
+    display: block;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print-text {
+    min-height: 0;
+    overflow: hidden;
+    border-top: 1px solid #000;
+    padding-top: 6mm;
+  }
+
+  .print-number {
+    font-family: "ABCsolar", sans-serif;
+    font-size: 8pt;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4mm;
+  }
+
+  .print-text h2 {
+    font-family: "ABCsolar", "Apple SD Gothic Neo", sans-serif;
+    font-size: 17pt;
+    font-weight: 500;
+    line-height: 1.25;
+    margin: 0 0 5mm;
+  }
+
+  .print-text dl {
+    display: grid;
+    grid-template-columns: 28mm 1fr;
+    gap: 1.5mm 4mm;
+    font-family: "ABCsolar", "Apple SD Gothic Neo", sans-serif;
+    font-size: 8.5pt;
+    line-height: 1.35;
+    margin: 0 0 5mm;
+  }
+
+  .print-text dt {
+    font-weight: 600;
+  }
+
+  .print-text dd {
+    margin: 0;
+  }
+
+  .print-text p {
+    font-family: "Apple SD Gothic Neo", sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.6;
+    margin: 0;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+  }
+}
