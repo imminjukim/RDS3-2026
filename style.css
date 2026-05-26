@@ -857,3 +857,11 @@
   background: #ff00ff !important;
   color: #000 !important;
 }
+
+#flipbook {
+  display: none !important;
+}
+
+#flipbook.open {
+  display: flex !important;
+}
