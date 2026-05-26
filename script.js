@@ -1578,3 +1578,10 @@ downloadPdfBtn.addEventListener("click", e => {
     window.print();
   }, 100);
 });
+
+const landing = document.getElementById("landing");
+const enterBtn = document.getElementById("enterBtn");
+
+enterBtn.addEventListener("click", () => {
+  landing.classList.add("hidden");
+});
