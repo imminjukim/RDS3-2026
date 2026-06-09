@@ -888,16 +888,34 @@ const ARCHIVE = [
   presentStatus: "cultual_icon",
   valueType: "aesthetic_value"
 },
+];
 
+const STATUS_AXIS = [
+  "theoretical_model",
+  "unresolved_mystery",
+  "cautionary_case",
+  "discarded_fake",
+  "cultual_icon"
+];
 
+const VALUE_AXIS = [
+  "conceptual_value",
+  "aesthetic_value",
+  "historical_value",
+  "educational_value",
+  "folkloric_value"
 ];
 
 let remainingItems = [...ARCHIVE];
+const usedItemIds = new Set();
 
 const stage = document.getElementById("stage");
 const hint = document.getElementById("hint");
 const panel = document.getElementById("panel");
 const closeBtn = document.getElementById("closeBtn");
+
+const categoryOverlay = document.getElementById("categoryOverlay");
+const categoryLabel = document.getElementById("categoryLabel");
 
 const STAGE_WIDTH = 10000;
 const STAGE_HEIGHT = 7000;
@@ -913,6 +931,104 @@ const viewport = {
   x: initialViewport.x,
   y: initialViewport.y
 };
+
+function buildCategoryAreas() {
+  const cells = [];
+
+  STATUS_AXIS.forEach(status => {
+    VALUE_AXIS.forEach(value => {
+      const items = ARCHIVE.filter(item =>
+        item.presentStatus === status &&
+        item.valueType === value
+      );
+
+      if (items.length > 0) {
+        cells.push({
+          presentStatus: status,
+          valueType: value,
+          count: items.length,
+          items
+        });
+      }
+    });
+  });
+
+  const total = cells.reduce((sum, cell) => sum + cell.count, 0);
+  let acc = 0;
+
+  return cells.map((cell, index) => {
+    const start = acc;
+    const ratio = cell.count / total;
+    acc += ratio;
+
+    return {
+      ...cell,
+      areaIndex: index,
+      start,
+      end: acc
+    };
+  });
+}
+
+const CATEGORY_AREAS = buildCategoryAreas();
+
+function getCategoryFromScreen(clientX) {
+  const ratioX = clientX / window.innerWidth;
+
+  return CATEGORY_AREAS.find(area =>
+    ratioX >= area.start && ratioX < area.end
+  ) || CATEGORY_AREAS[CATEGORY_AREAS.length - 1];
+}
+
+function showCategoryOverlay(category) {
+  if (!category || !categoryOverlay || !categoryLabel) return;
+
+  categoryOverlay.style.left = category.start * window.innerWidth + "px";
+  categoryOverlay.style.top = "0px";
+  categoryOverlay.style.width = (category.end - category.start) * window.innerWidth + "px";
+  categoryOverlay.style.height = window.innerHeight + "px";
+
+  categoryLabel.innerHTML = `
+    ${category.presentStatus}<br>
+    ${category.valueType}<br>
+    ${category.count} items
+  `;
+
+  categoryOverlay.classList.add("active");
+}
+
+function hideCategoryOverlay() {
+  if (!categoryOverlay) return;
+  categoryOverlay.classList.remove("active");
+}
+
+function randomItemByCategory(category) {
+  if (!category) return null;
+
+  const matched = category.items.filter(item =>
+    !usedItemIds.has(item.id)
+  );
+
+  if (matched.length === 0) {
+    return null;
+  }
+
+  const item = matched[Math.floor(Math.random() * matched.length)];
+  usedItemIds.add(item.id);
+
+  return item;
+}
+
+function randomItem() {
+  const available = ARCHIVE.filter(item => !usedItemIds.has(item.id));
+
+  if (available.length === 0) return null;
+
+  const item = available[Math.floor(Math.random() * available.length)];
+  usedItemIds.add(item.id);
+
+  return item;
+}
 
 function escapeHtml(str) {
   return String(str ?? "").replace(/[&<>'"]/g, c => ({
@@ -952,6 +1068,7 @@ function panBy(dx, dy) {
   clampViewport();
   applyViewport();
   closePanel();
+  hideCategoryOverlay();
 }
 
 applyViewport();
@@ -970,16 +1087,9 @@ function imageWithFallback(img, base) {
   tryNext();
 }
 
-function randomItem() {
-  if (remainingItems.length === 0) {
-    remainingItems = [...ARCHIVE];
-  }
+function createArtifact(item = randomItem(), x = null, y = null, category = null) {
+  if (!item) return null;
 
-  const index = Math.floor(Math.random() * remainingItems.length);
-  return remainingItems.splice(index, 1)[0];
-}
-
-function createArtifact(item = randomItem(), x = null, y = null) {
   hint.classList.add("hidden");
 
   const el = document.createElement("article");
@@ -999,10 +1109,19 @@ function createArtifact(item = randomItem(), x = null, y = null) {
     visibleTopLeft.y + 120 + Math.random() * Math.max(220, visibleBottomRight.y - visibleTopLeft.y - 260)
   );
 
+  const assignedCategory = category ?? CATEGORY_AREAS.find(area =>
+    area.presentStatus === item.presentStatus &&
+    area.valueType === item.valueType
+  );
+
   el.style.setProperty("--x", px + "px");
   el.style.setProperty("--y", py + "px");
   el.style.setProperty("--z", ++zCounter);
+
   el.dataset.id = item.id;
+  el.dataset.categoryIndex = assignedCategory ? String(assignedCategory.areaIndex) : "";
+  el.dataset.holding = "false";
+  el.dataset.dragged = "false";
 
   el.innerHTML = `
     <button class="delete" type="button" aria-label="remove artifact">×</button>
@@ -1025,11 +1144,21 @@ function createArtifact(item = randomItem(), x = null, y = null) {
   });
 
   img.addEventListener("mouseenter", () => {
-    if (el.dataset.dragged === "true") return;
+    const category = CATEGORY_AREAS[Number(el.dataset.categoryIndex)];
+
+    if (category) {
+      showCategoryOverlay(category);
+    }
+
     openPanel(item, img.currentSrc || img.src, img);
   });
 
-  img.addEventListener("mouseleave", closePanel);
+  img.addEventListener("mouseleave", () => {
+    if (el.dataset.holding === "true") return;
+
+    hideCategoryOverlay();
+    closePanel();
+  });
 
   img.addEventListener("click", e => {
     e.stopPropagation();
@@ -1037,7 +1166,14 @@ function createArtifact(item = randomItem(), x = null, y = null) {
     if (window.matchMedia("(hover: none)").matches) {
       if (panel.classList.contains("open") && panel.dataset.id === String(item.id)) {
         closePanel();
+        hideCategoryOverlay();
       } else {
+        const category = CATEGORY_AREAS[Number(el.dataset.categoryIndex)];
+
+        if (category) {
+          showCategoryOverlay(category);
+        }
+
         openPanel(item, img.currentSrc || img.src, img);
       }
 
@@ -1060,9 +1196,19 @@ function makeDraggable(el) {
   el.addEventListener("pointerdown", e => {
     if (e.target.closest("button")) return;
 
+    e.preventDefault();
+
     el.setPointerCapture(e.pointerId);
     el.style.setProperty("--z", ++zCounter);
+
     el.dataset.dragged = "false";
+    el.dataset.holding = "true";
+
+    const category = CATEGORY_AREAS[Number(el.dataset.categoryIndex)];
+
+    if (category) {
+      showCategoryOverlay(category);
+    }
 
     startX = e.clientX;
     startY = e.clientY;
@@ -1093,6 +1239,8 @@ function makeDraggable(el) {
 
     startX = undefined;
     startY = undefined;
+
+    el.dataset.holding = "false";
 
     setTimeout(() => {
       el.dataset.dragged = "false";
@@ -1282,6 +1430,8 @@ document.getElementById("clearBtn").addEventListener("click", e => {
   e.stopPropagation();
 
   document.querySelectorAll(".artifact").forEach(a => a.remove());
+  usedItemIds.clear();
+
   hint.classList.remove("hidden");
 });
 
@@ -1311,8 +1461,20 @@ window.addEventListener("resize", () => {
 stage.addEventListener("click", e => {
   if (e.target !== stage && e.target !== hint) return;
 
+  const category = getCategoryFromScreen(e.clientX);
+
+  if (!category) return;
+
+  const item = randomItemByCategory(category);
+
+  if (!item) {
+    showCategoryOverlay(category);
+    return;
+  }
+
   const p = screenToWorld(e.clientX, e.clientY);
-  createArtifact(randomItem(), p.x - 50, p.y - 50);
+
+  createArtifact(item, p.x - 50, p.y - 50, category);
 });
 
 window.addEventListener("wheel", e => {
@@ -1396,6 +1558,8 @@ function buildPrintCatalog() {
 }
 
 window.addEventListener("beforeprint", buildPrintCatalog);
+
+
 
 /* =========================
    FLIPBOOK
